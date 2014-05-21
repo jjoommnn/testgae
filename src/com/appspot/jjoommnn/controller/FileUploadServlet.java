@@ -19,16 +19,18 @@ import com.google.appengine.api.datastore.Entity;
 
 public class FileUploadServlet extends HttpServlet
 {
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
+	private static final long serialVersionUID = 1L;
+
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 		
-        Map<String, BlobKey> blobs = blobstoreService.getUploadedBlobs(req);
-        BlobKey blobKey = blobs.get("myFile");
+        Map<String, List<BlobKey>> blobs = blobstoreService.getUploads( req );
+        List<BlobKey> blobKeys = blobs.get("myFile");
         Map<String, List<FileInfo>> files = blobstoreService.getFileInfos( req );
-        List<FileInfo> fileInfo = files.get("myFile");
+        List<FileInfo> fileInfos = files.get("myFile");
 
-        if (blobKey == null)
+        if (blobKeys == null || blobKeys.size() <= 0 )
         {
             res.sendRedirect("/");
         }
@@ -36,17 +38,20 @@ public class FileUploadServlet extends HttpServlet
         {
         	DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		
-        	String bks = blobKey.getKeyString();
-        	FileInfo fi = fileInfo.get( 0 );
+        	BlobKey bk = blobKeys.get( 0 );
+        	FileInfo fi = fileInfos.get( 0 );
+        	
+        	String bks = bk.getKeyString();
         	
         	Entity file = new Entity( "File", bks );
         	file.setProperty( "blobKey", bks );
         	file.setProperty( "fileName", fi.getFilename() );
         	file.setProperty( "fileType", fi.getContentType() );
+        	file.setProperty( "fileSize", fi.getSize() );
         	
         	ds.put( file );
         	
-            res.sendRedirect("/doneUpload.do?blobKey=" + blobKey.getKeyString());
+            res.sendRedirect("/doneUpload.do?blobKey=" + bks);
         }
 	}
 }

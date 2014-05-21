@@ -19,7 +19,9 @@ import com.google.appengine.api.datastore.Entity;
 
 public class FileDownloadServlet extends HttpServlet
 {
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
+	private static final long serialVersionUID = 1L;
+
+    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
 		String bks = req.getParameter( "blobKey" );
 		
