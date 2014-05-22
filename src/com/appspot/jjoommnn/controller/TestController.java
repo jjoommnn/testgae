@@ -2,18 +2,14 @@ package com.appspot.jjoommnn.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.appengine.api.blobstore.BlobKey;
-import com.google.appengine.api.blobstore.BlobstoreService;
-import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -30,7 +26,8 @@ public class TestController
 	}
 	
 	@RequestMapping("/doRegister.do")
-	public String doRegister( HttpServletRequest request )
+	@ResponseBody
+	public void doRegister( HttpServletRequest request )
 	{
 		String userId = request.getParameter( "userId" );
 		String userName = request.getParameter( "userName" );
@@ -42,8 +39,6 @@ public class TestController
 		user.setProperty( "userName", userName );
 		
 		ds.put( user );
-		
-		return "doneRegister";
 	}
 	
 	@RequestMapping( "/list.do" )

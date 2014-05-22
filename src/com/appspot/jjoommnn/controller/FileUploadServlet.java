@@ -32,7 +32,7 @@ public class FileUploadServlet extends HttpServlet
 
         if (blobKeys == null || blobKeys.size() <= 0 )
         {
-            res.sendRedirect("/");
+            res.sendError( 500 );
         }
         else
         {
@@ -51,7 +51,7 @@ public class FileUploadServlet extends HttpServlet
         	
         	ds.put( file );
         	
-            res.sendRedirect("/doneUpload.do?blobKey=" + bks);
+        	res.getWriter().print( bks );
         }
 	}
 }
