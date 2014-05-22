@@ -2,14 +2,21 @@ package com.appspot.jjoommnn.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.appengine.api.blobstore.FileInfo;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -70,14 +77,40 @@ public class TestController
 		return "upload";
 	}
 	
-	@RequestMapping( "/doneUpload.do" )
-	public String doUpload( HttpServletRequest request, Model model )
+	@RequestMapping( "/doUpload.do" )
+	@ResponseBody
+	public void doUpload( HttpServletRequest request, HttpServletResponse response ) throws Exception
 	{
-		String blobKey = request.getParameter( "blobKey" );
-		
-        model.addAttribute( "blobKey", blobKey );
+	    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
         
-		return "doneUpload";
+        Map<String, List<BlobKey>> blobs = blobstoreService.getUploads( request );
+        List<BlobKey> blobKeys = blobs.get("myFile");
+        Map<String, List<FileInfo>> files = blobstoreService.getFileInfos( request );
+        List<FileInfo> fileInfos = files.get("myFile");
+
+        if (blobKeys == null || blobKeys.size() <= 0 )
+        {
+            response.sendError( 500 );
+        }
+        else
+        {
+            DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+        
+            BlobKey bk = blobKeys.get( 0 );
+            FileInfo fi = fileInfos.get( 0 );
+            
+            String bks = bk.getKeyString();
+            
+            Entity file = new Entity( "File", bks );
+            file.setProperty( "blobKey", bks );
+            file.setProperty( "fileName", fi.getFilename() );
+            file.setProperty( "fileType", fi.getContentType() );
+            file.setProperty( "fileSize", fi.getSize() );
+            
+            ds.put( file );
+            
+            response.getWriter().print( bks );
+        }
 	}
 	
 	@RequestMapping( "/listUpload.do" )

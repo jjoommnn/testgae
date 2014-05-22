@@ -18,11 +18,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     </context-param>
     
     <servlet>
-        <servlet-name>fileUpload</servlet-name>
-        <servlet-class>com.appspot.jjoommnn.controller.FileUploadServlet</servlet-class>
-    </servlet>
-    
-    <servlet>
         <servlet-name>fileDownload</servlet-name>
         <servlet-class>com.appspot.jjoommnn.controller.FileDownloadServlet</servlet-class>
     </servlet>
@@ -39,11 +34,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>fileUpload</servlet-name>
-        <url-pattern>/fileUpload</url-pattern>
-    </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>fileDownload</servlet-name>
         <url-pattern>/fileDownload</url-pattern>
