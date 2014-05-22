@@ -28,6 +28,6 @@ $(function()
         <br/>
         <input type="submit" value="저장"></input>
     </form>
-    <a href="index.html">처음으로</a>
+    <a href="index.jsp">처음으로</a>
 </body>
 </html>

@@ -34,6 +34,6 @@ $(function()
         <input type="file" name="myFile">
         <input type="submit" value="Submit">
     </form>
-    <a href="index.html">처음으로</a>
+    <a href="index.jsp">처음으로</a>
 </body>
 </html>
