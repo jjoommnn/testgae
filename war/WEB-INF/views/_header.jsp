@@ -11,6 +11,6 @@
         <li><a href="upload.do">업로드</a></li>
         <li><a href="listUpload.do">업로드 목록</a></li>
       </ul>
-    </div><!--/.nav-collapse -->
+    </div>
   </div>
 </div>
