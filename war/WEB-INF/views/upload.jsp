@@ -51,7 +51,7 @@ $(function()
             <label for="myFile">파일</label>
             <input type="file" id="myFile" name="myFile" />
         </div>
-        <button type="submit" class="btn btn-default">저장</button>
+        <button type="submit" class="btn btn-primary">저장</button>
       </form>
       
     </div>

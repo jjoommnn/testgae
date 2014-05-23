@@ -50,7 +50,7 @@ $(function()
             <label for="userName">이름</label>
             <input type="text" class="form-control" id="userName" name="userName" placeholder="이름을 입력하세요.">
         </div>
-        <button type="submit" class="btn btn-default">저장</button>
+        <button type="submit" class="btn btn-primary">저장</button>
       </form>
       
     </div>
