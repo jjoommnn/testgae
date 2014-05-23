@@ -1,6 +1,7 @@
 package com.appspot.jjoommnn.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,7 @@ public class TestController
             file.setProperty( "fileName", fi.getFilename() );
             file.setProperty( "fileType", fi.getContentType() );
             file.setProperty( "fileSize", fi.getSize() );
+            file.setProperty(  "fileUploadDate", new Date() );
             
             ds.put( file );
             
@@ -129,6 +131,8 @@ public class TestController
 			file.put( "blobKey", e.getProperty( "blobKey" ) );
 			file.put( "fileName", e.getProperty( "fileName") );
 			file.put( "fileType", e.getProperty( "fileType" ) );
+			file.put(  "fileSize", e.getProperty( "fileSize" ) );
+			file.put(  "fileUploadDate", e.getProperty( "fileUploadDate" ) );
 			fileList.add( file );
 		}
 		

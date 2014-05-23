@@ -20,17 +20,19 @@
 	    <table class="table table-striped">
 	      <thead>
 	        <tr>
-	          <th>키</th>
 	          <th>이름</th>
 	          <th>타입</th>
+	          <th>크기</th>
+	          <th>업로드날짜</th>
 	        </tr>
 	      </thead>
 	      <tbody>
 	      <c:forEach items="${fileList}" var="file">
 	        <tr>
-	          <td><a href="fileDownload?blobKey=${file.blobKey}">${file.blobKey}</a></td>
-	          <td>${file.fileName}</td>
-	          <td>${file.fileType }</td>
+	          <td><a href="fileDownload?blobKey=${file.blobKey}">${file.fileName}</a></td>
+	          <td>${file.fileType}</td>
+	          <td>${file.fileSize}</td>
+	          <td>${file.fileUploadDate}</td>
 	        </tr>
 	      </c:forEach>
 	      </tbody>
