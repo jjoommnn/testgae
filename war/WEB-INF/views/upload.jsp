@@ -26,6 +26,7 @@ $(function()
 		},
 		error : function()
 		{
+			$.unblockUI();
 			alert( "저장에 실패했습니다." );
 		},
 		success : function( result )
