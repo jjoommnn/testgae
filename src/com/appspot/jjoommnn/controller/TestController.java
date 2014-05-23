@@ -55,7 +55,7 @@ public class TestController
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		
 		Query q = new Query( "User" );
-		PreparedQuery pq = ds.prepare(q);
+		PreparedQuery pq = ds.prepare( q );
 		
 		ArrayList userList = new ArrayList();
 		
@@ -102,9 +102,12 @@ public class TestController
             
             String bks = bk.getKeyString();
             
+            String fileName = fi.getFilename();
+            fileName = new String( fileName.getBytes( "ISO-8859-1" ), "UTF-8" );
+            
             Entity file = new Entity( "File", bks );
             file.setProperty( "blobKey", bks );
-            file.setProperty( "fileName", fi.getFilename() );
+            file.setProperty( "fileName", fileName );
             file.setProperty( "fileType", fi.getContentType() );
             file.setProperty( "fileSize", fi.getSize() );
             file.setProperty(  "fileUploadDate", new Date() );
@@ -121,7 +124,7 @@ public class TestController
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		
 		Query q = new Query( "File" );
-		PreparedQuery pq = ds.prepare(q);
+		PreparedQuery pq = ds.prepare( q );
 		
 		ArrayList fileList = new ArrayList();
 		
