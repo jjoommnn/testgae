@@ -15,5 +15,14 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/_header.jsp"></jsp:include>
+    
+    <div class="container">
+
+      <div>
+        <h1>Google App Engine Test</h1>
+        <p class="lead">Google App Engine Test</p>
+      </div>
+
+    </div>
 </body>
 </html>

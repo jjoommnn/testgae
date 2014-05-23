@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">Google App Engine Test</a>
+      <a class="navbar-brand" href="/">Google App Engine Test</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">

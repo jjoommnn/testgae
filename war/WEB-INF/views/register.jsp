@@ -20,14 +20,20 @@ $(function()
 </script>
 </head>
 <body>
-    <h2 class="sub-header">입력</h2>
-    <form id="myForm" action="doRegister.do">
+    <jsp:include page="/WEB-INF/views/_header.jsp"></jsp:include>
+    
+    <div class="container">
+    
+      <h1>Register</h1>
+      
+      <form id="myForm" action="doRegister.do">
         <span>아이디:</span><input type="text" name="userId" value=""></input>
         <br/>
         <span>이름:</span><input type="text" name="userName" value=""></input>
         <br/>
         <input type="submit" value="저장"></input>
-    </form>
-    <a href="index.jsp">처음으로</a>
+      </form>
+      
+    </div>
 </body>
 </html>

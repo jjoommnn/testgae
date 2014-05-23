@@ -10,31 +10,37 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h2 class="sub-header">리스트</h2>
-    <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>아이디</th>
-          <th>Header</th>
-          <th>Header</th>
-          <th>Header</th>
-        </tr>
-      </thead>
-      <tbody>
-      <c:forEach items="${userList}" var="user">
-        <tr>
-          <td>${user.userId}</td>
-          <td>${user.userName}</td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </c:forEach>
-      </tbody>
-    </table>
+    <jsp:include page="/WEB-INF/views/_header.jsp"></jsp:include>
+    
+    <div class="container">
+    
+	    <h1>List</h1>
+	    
+	    <div class="table-responsive">
+	    <table class="table table-striped">
+	      <thead>
+	        <tr>
+	          <th>이름</th>
+	          <th>아이디</th>
+	          <th>Header</th>
+	          <th>Header</th>
+	          <th>Header</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	      <c:forEach items="${userList}" var="user">
+	        <tr>
+	          <td>${user.userId}</td>
+	          <td>${user.userName}</td>
+	          <td></td>
+	          <td></td>
+	          <td></td>
+	        </tr>
+	      </c:forEach>
+	      </tbody>
+	    </table>
+	    </div>
+	    
     </div>
-    <a href="index.jsp">처음으로</a>
 </body>
 </html>

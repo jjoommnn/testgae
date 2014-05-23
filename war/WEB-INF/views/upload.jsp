@@ -29,11 +29,17 @@ $(function()
 </script>
 </head>
 <body>
-    <h2 class="sub-header">파일을 선택하세요</h2>
-    <form id="myForm" action="<%= blobstoreService.createUploadUrl("/doUpload.do") %>" method="post" enctype="multipart/form-data">
+    <jsp:include page="/WEB-INF/views/_header.jsp"></jsp:include>
+    
+    <div class="container">
+    
+      <h1>File Upload</h1>
+      
+      <form id="myForm" action="<%= blobstoreService.createUploadUrl("/doUpload.do") %>" method="post" enctype="multipart/form-data">
         <input type="file" name="myFile">
         <input type="submit" value="Submit">
-    </form>
-    <a href="index.jsp">처음으로</a>
+      </form>
+      
+    </div>
 </body>
 </html>
