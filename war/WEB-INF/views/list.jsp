@@ -22,9 +22,7 @@
 	        <tr>
 	          <th>이름</th>
 	          <th>아이디</th>
-	          <th>Header</th>
-	          <th>Header</th>
-	          <th>Header</th>
+	          <th>날짜</th>
 	        </tr>
 	      </thead>
 	      <tbody>
@@ -32,9 +30,7 @@
 	        <tr>
 	          <td>${user.userId}</td>
 	          <td>${user.userName}</td>
-	          <td></td>
-	          <td></td>
-	          <td></td>
+	          <td>${user.createDate}</td>
 	        </tr>
 	      </c:forEach>
 	      </tbody>

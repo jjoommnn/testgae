@@ -23,7 +23,7 @@
 	          <th>이름</th>
 	          <th>타입</th>
 	          <th>크기</th>
-	          <th>업로드날짜</th>
+	          <th>날짜</th>
 	        </tr>
 	      </thead>
 	      <tbody>
@@ -32,7 +32,7 @@
 	          <td><a href="fileDownload?blobKey=${file.blobKey}">${file.fileName}</a></td>
 	          <td>${file.fileType}</td>
 	          <td>${file.fileSize}</td>
-	          <td>${file.fileUploadDate}</td>
+	          <td>${file.createDate}</td>
 	        </tr>
 	      </c:forEach>
 	      </tbody>

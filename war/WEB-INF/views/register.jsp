@@ -8,13 +8,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="./js/jquery.form.min.js"></script>
+<script type="text/javascript" src="./js/jquery.blockUI.js"></script>
 <script type="text/javascript">
 $(function()
 {
-	$( "#myForm" ).ajaxForm( function()
-	{
-		$( "#myForm" ).clearForm();
-		alert( "저장 했습니다." );
+	$( "#myForm" ).ajaxForm({
+		beforeSubmit : function( arr, $form, options )
+        { 
+            $.blockUI( { message: "<p>저장 중입니다.</p>" } );
+        },
+		error : function()
+		{
+			$.unblockUI();
+			alert( "저장에 실패했습니다." );
+		},
+		success : function()
+		{
+			$.unblockUI();
+			$( "#myForm" ).clearForm();
+			alert( "저장 했습니다." );
+		}
 	});
 });
 </script>

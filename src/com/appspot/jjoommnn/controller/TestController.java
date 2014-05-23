@@ -27,6 +27,7 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 @Controller
 public class TestController
@@ -51,6 +52,7 @@ public class TestController
 		Entity user = new Entity( "User", userId );
 		user.setProperty( "userId", userId );
 		user.setProperty( "userName", userName );
+		user.setProperty( "createDate", new Date() );
 		
 		ds.put( user );
 	}
@@ -61,6 +63,8 @@ public class TestController
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		
 		Query q = new Query( "User" );
+		q.addSort( "createDate", SortDirection.DESCENDING );
+		
 		PreparedQuery pq = ds.prepare( q );
 		
 		ArrayList userList = new ArrayList();
@@ -70,6 +74,7 @@ public class TestController
 			HashMap user = new HashMap();
 			user.put( "userId", e.getProperty( "userId" ) );
 			user.put( "userName", e.getProperty( "userName") );
+			user.put( "createDate", e.getProperty( "createDate") );
 			userList.add( user );
 		}
 		
@@ -133,7 +138,7 @@ public class TestController
             file.setProperty( "fileName", fileName );
             file.setProperty( "fileType", fi.getContentType() );
             file.setProperty( "fileSize", fi.getSize() );
-            file.setProperty(  "fileUploadDate", new Date() );
+            file.setProperty( "createDate", fi.getCreation() );
             
             ds.put( file );
             
@@ -147,6 +152,8 @@ public class TestController
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		
 		Query q = new Query( "File" );
+		q.addSort( "createDate", SortDirection.DESCENDING );
+		
 		PreparedQuery pq = ds.prepare( q );
 		
 		ArrayList fileList = new ArrayList();
@@ -157,8 +164,8 @@ public class TestController
 			file.put( "blobKey", e.getProperty( "blobKey" ) );
 			file.put( "fileName", e.getProperty( "fileName") );
 			file.put( "fileType", e.getProperty( "fileType" ) );
-			file.put(  "fileSize", e.getProperty( "fileSize" ) );
-			file.put(  "fileUploadDate", e.getProperty( "fileUploadDate" ) );
+			file.put( "fileSize", e.getProperty( "fileSize" ) );
+			file.put( "createDate", e.getProperty( "createDate" ) );
 			fileList.add( file );
 		}
 		
