@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function()
+{
+	$( ".menu_list" ).addClass( "active" );	
+});
+</script>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/_header.jsp"></jsp:include>
@@ -17,11 +23,11 @@
 	    <h1>List</h1>
 	    
 	    <div class="table-responsive">
-	    <table class="table table-striped">
+	    <table class="table table-bordered table-striped">
 	      <thead>
 	        <tr>
-	          <th>이름</th>
 	          <th>아이디</th>
+	          <th>이름</th>
 	          <th>날짜</th>
 	        </tr>
 	      </thead>

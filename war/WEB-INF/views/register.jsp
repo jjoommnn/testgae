@@ -12,6 +12,8 @@
 <script type="text/javascript">
 $(function()
 {
+	$( ".menu_register" ).addClass( "active" );
+	
 	$( "#myForm" ).ajaxForm({
 		beforeSubmit : function( arr, $form, options )
         { 
@@ -39,12 +41,16 @@ $(function()
     
       <h1>Register</h1>
       
-      <form id="myForm" action="doRegister.do">
-        <span>아이디:</span><input type="text" name="userId" value=""></input>
-        <br/>
-        <span>이름:</span><input type="text" name="userName" value=""></input>
-        <br/>
-        <input type="submit" value="저장"></input>
+      <form id="myForm" action="doRegister.do" role="form">
+        <div class="form-group">
+		    <label for="userId">아이디</label>
+		    <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요.">
+		</div>
+		<div class="form-group">
+            <label for="userName">이름</label>
+            <input type="text" class="form-control" id="userName" name="userName" placeholder="이름을 입력하세요.">
+        </div>
+        <button type="submit" class="btn btn-default">저장</button>
       </form>
       
     </div>

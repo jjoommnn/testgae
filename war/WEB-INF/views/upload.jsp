@@ -17,7 +17,7 @@
 <script type="text/javascript">
 $(function()
 {
-	var option = {};
+	$( ".menu_upload" ).addClass( "active" );
 	
 	$( "#myForm" ).ajaxForm({
 		beforeSubmit : function( arr, $form, options )
@@ -47,8 +47,11 @@ $(function()
       <h1>File Upload</h1>
       
       <form id="myForm" action="<%= blobstoreService.createUploadUrl("/doUpload.do") %>" method="post" enctype="multipart/form-data">
-        <input type="file" name="myFile">
-        <input type="submit" value="Submit">
+        <div class="form-group">
+            <label for="myFile">파일</label>
+            <input type="file" id="myFile" name="myFile" />
+        </div>
+        <button type="submit" class="btn btn-default">저장</button>
       </form>
       
     </div>
