@@ -5,10 +5,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +31,8 @@ import com.google.appengine.api.datastore.Query;
 @Controller
 public class TestController
 {
+    private static final Logger log = Logger.getLogger( TestController.class.getName() );
+    
 	@RequestMapping("/register.do")
 	public String register()
 	{
@@ -103,7 +109,24 @@ public class TestController
             String bks = bk.getKeyString();
             
             String fileName = fi.getFilename();
-            fileName = new String( fileName.getBytes( "ISO-8859-1" ), "UTF-8" );
+            if( fileName.startsWith( "=?" ) && fileName.endsWith( "?=" ) )
+            {
+                Pattern p = Pattern.compile( "=\\?([^\\?]*)\\?([^\\?])*\\?([^\\?]*)\\?=" );
+                Matcher m = p.matcher( fileName );
+                if( m.find() )
+                {
+                    byte[] b = Base64.decodeBase64( m.group( 3 ) );
+                    fileName = new String( b, m.group( 1 ) );
+                }
+                else
+                {
+                    fileName = new String( fileName.getBytes( "ISO-8859-1" ), "UTF-8" );
+                }
+            }
+            else
+            {
+                fileName = new String( fileName.getBytes( "ISO-8859-1" ), "UTF-8" );
+            }
             
             Entity file = new Entity( "File", bks );
             file.setProperty( "blobKey", bks );
