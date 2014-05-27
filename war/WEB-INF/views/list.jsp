@@ -26,6 +26,7 @@ $(function()
 	    <table class="table table-bordered table-striped">
 	      <thead>
 	        <tr>
+	          <th></th>
 	          <th>아이디</th>
 	          <th>이름</th>
 	          <th>날짜</th>
@@ -34,6 +35,7 @@ $(function()
 	      <tbody>
 	      <c:forEach items="${userList}" var="user">
 	        <tr>
+	          <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
 	          <td>${user.userId}</td>
 	          <td>${user.userName}</td>
 	          <td>${user.createDate}</td>

@@ -25,6 +25,8 @@ import com.google.appengine.api.blobstore.FileInfo;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -81,6 +83,19 @@ public class TestController
 		model.addAttribute( "userList", userList );
 		
 		return "list";
+	}
+	
+	@RequestMapping( "/delete.do" )
+	@ResponseBody
+	public void delete( HttpServletRequest request )
+	{
+	    String userId = request.getParameter( "userId" );
+	    
+	    DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+	    
+	    Key k = KeyFactory.createKey( "User", userId );
+	    
+	    ds.delete( k );
 	}
 	
 	@RequestMapping( "/upload.do" )
@@ -172,5 +187,21 @@ public class TestController
 		model.addAttribute( "fileList", fileList );
 		
 		return "listUpload";
+	}
+	
+	@RequestMapping( "/deleteUpload.do" )
+	@ResponseBody
+	public void deleteUpload( HttpServletRequest request )
+	{
+	    String bks = request.getParameter( "blobKey" );
+	    
+	    BlobstoreService bs = BlobstoreServiceFactory.getBlobstoreService();
+        DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+        
+	    BlobKey blobKey = new BlobKey( bks );
+	    Key fileKey = KeyFactory.createKey( "File", bks );
+	    
+	    bs.delete( blobKey );
+	    ds.delete( fileKey );
 	}
 }

@@ -26,6 +26,7 @@ $(function()
 	    <table class="table table-bordered table-striped">
 	      <thead>
 	        <tr>
+	          <th><input type="checkbox"></input></th>
 	          <th>이름</th>
 	          <th>타입</th>
 	          <th>크기</th>
@@ -35,6 +36,7 @@ $(function()
 	      <tbody>
 	      <c:forEach items="${fileList}" var="file">
 	        <tr>
+	          <td><input type="checkbox"></input></td>
 	          <td><a href="fileDownload?blobKey=${file.blobKey}">${file.fileName}</a></td>
 	          <td>${file.fileType}</td>
 	          <td>${file.fileSize}</td>
