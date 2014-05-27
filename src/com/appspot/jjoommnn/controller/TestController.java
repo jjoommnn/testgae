@@ -131,6 +131,7 @@ public class TestController
             String fileName = fi.getFilename();
             if( fileName.startsWith( "=?" ) && fileName.endsWith( "?=" ) )
             {
+                //      =?UTF-8?B?xxxxxxxxxxxxxxxxxxx?=
                 Pattern p = Pattern.compile( "=\\?([^\\?]*)\\?([^\\?])*\\?([^\\?]*)\\?=" );
                 Matcher m = p.matcher( fileName );
                 if( m.find() )
