@@ -11,7 +11,24 @@
 <script type="text/javascript">
 $(function()
 {
-	$( ".menu_list_upload" ).addClass( "active" );	
+	$( ".menu_list_upload" ).addClass( "active" );
+	
+	$( "a.delete" ).click( function()
+	{
+	    if( !confirm( "정말 삭제하시겠습니까?" ) )
+	        return false;
+	    
+	    var blobKey = $( this ).next().val();
+	    var tr = $( this ).closest( "tr" );
+	    
+	    $.post( "deleteUpload.do", { blobKey : blobKey }, function( data )
+	    {
+	        alert( "삭제 했습니다." );
+	        $( tr ).remove();
+	    });
+	    
+	    return false;
+	});
 });
 </script>
 </head>
@@ -26,7 +43,7 @@ $(function()
 	    <table class="table table-bordered table-striped">
 	      <thead>
 	        <tr>
-	          <th><input type="checkbox"></input></th>
+	          <th class="text-center">삭제</th>
 	          <th>이름</th>
 	          <th>타입</th>
 	          <th>크기</th>
@@ -36,7 +53,10 @@ $(function()
 	      <tbody>
 	      <c:forEach items="${fileList}" var="file">
 	        <tr>
-	          <td><input type="checkbox"></input></td>
+	          <td class="text-center">
+                  <a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>
+                  <input type="hidden" value="${file.blobKey}"></input>
+              </td>
 	          <td><a href="fileDownload?blobKey=${file.blobKey}">${file.fileName}</a></td>
 	          <td>${file.fileType}</td>
 	          <td>${file.fileSize}</td>

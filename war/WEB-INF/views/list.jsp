@@ -11,7 +11,24 @@
 <script type="text/javascript">
 $(function()
 {
-	$( ".menu_list" ).addClass( "active" );	
+	$( ".menu_list" ).addClass( "active" );
+	
+	$( "a.delete" ).click( function()
+	{
+		if( !confirm( "정말 삭제하시겠습니까?" ) )
+			return false;
+		
+		var userId = $( this ).next().val();
+		var tr = $( this ).closest( "tr" );
+		
+		$.post( "delete.do", { userId : userId }, function( data )
+	    {
+		    alert( "삭제 했습니다." );
+		    $( tr ).remove();
+	    });
+		
+		return false;
+	});
 });
 </script>
 </head>
@@ -35,7 +52,10 @@ $(function()
 	      <tbody>
 	      <c:forEach items="${userList}" var="user">
 	        <tr>
-	          <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+	          <td class="text-center">
+	              <a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>
+	              <input type="hidden" value="${user.userId}"></input>
+	          </td>
 	          <td>${user.userId}</td>
 	          <td>${user.userName}</td>
 	          <td>${user.createDate}</td>

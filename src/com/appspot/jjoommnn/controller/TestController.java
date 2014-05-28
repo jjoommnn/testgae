@@ -85,6 +85,31 @@ public class TestController
 		return "list";
 	}
 	
+	@RequestMapping( "/getList.do" )
+	@ResponseBody
+	public List getList()
+	{
+	    DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+        
+        Query q = new Query( "User" );
+        q.addSort( "createDate", SortDirection.DESCENDING );
+        
+        PreparedQuery pq = ds.prepare( q );
+        
+        ArrayList userList = new ArrayList();
+        
+        for( Entity e : pq.asIterable() )
+        {
+            HashMap user = new HashMap();
+            user.put( "userId", e.getProperty( "userId" ) );
+            user.put( "userName", e.getProperty( "userName") );
+            user.put( "createDate", e.getProperty( "createDate") );
+            userList.add( user );
+        }
+        
+        return userList;
+	}
+	
 	@RequestMapping( "/delete.do" )
 	@ResponseBody
 	public void delete( HttpServletRequest request )
